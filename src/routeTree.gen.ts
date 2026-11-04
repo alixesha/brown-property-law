@@ -10,33 +10,127 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ServicesHoaCondoAssociationRouteImport } from './routes/services.hoa-condo-association'
+import { Route as ServicesLandTrustRouteImport } from './routes/services.land-trust'
+import { Route as ServicesResidentialClosingsRouteImport } from './routes/services.residential-closings'
+import { Route as ServicesResidentialEvictionsRouteImport } from './routes/services.residential-evictions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesHoaCondoAssociationRoute =
+  ServicesHoaCondoAssociationRouteImport.update({
+    id: '/hoa-condo-association',
+    path: '/hoa-condo-association',
+    getParentRoute: () => ServicesRoute,
+  } as any)
+const ServicesLandTrustRoute = ServicesLandTrustRouteImport.update({
+  id: '/land-trust',
+  path: '/land-trust',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesResidentialClosingsRoute =
+  ServicesResidentialClosingsRouteImport.update({
+    id: '/residential-closings',
+    path: '/residential-closings',
+    getParentRoute: () => ServicesRoute,
+  } as any)
+const ServicesResidentialEvictionsRoute =
+  ServicesResidentialEvictionsRouteImport.update({
+    id: '/residential-evictions',
+    path: '/residential-evictions',
+    getParentRoute: () => ServicesRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/hoa-condo-association': typeof ServicesHoaCondoAssociationRoute
+  '/services/land-trust': typeof ServicesLandTrustRoute
+  '/services/residential-closings': typeof ServicesResidentialClosingsRoute
+  '/services/residential-evictions': typeof ServicesResidentialEvictionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/hoa-condo-association': typeof ServicesHoaCondoAssociationRoute
+  '/services/land-trust': typeof ServicesLandTrustRoute
+  '/services/residential-closings': typeof ServicesResidentialClosingsRoute
+  '/services/residential-evictions': typeof ServicesResidentialEvictionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/hoa-condo-association': typeof ServicesHoaCondoAssociationRoute
+  '/services/land-trust': typeof ServicesLandTrustRoute
+  '/services/residential-closings': typeof ServicesResidentialClosingsRoute
+  '/services/residential-evictions': typeof ServicesResidentialEvictionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/services/hoa-condo-association'
+    | '/services/land-trust'
+    | '/services/residential-closings'
+    | '/services/residential-evictions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/services/hoa-condo-association'
+    | '/services/land-trust'
+    | '/services/residential-closings'
+    | '/services/residential-evictions'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/services/hoa-condo-association'
+    | '/services/land-trust'
+    | '/services/residential-closings'
+    | '/services/residential-evictions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +142,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/hoa-condo-association': {
+      id: '/services/hoa-condo-association'
+      path: '/hoa-condo-association'
+      fullPath: '/services/hoa-condo-association'
+      preLoaderRoute: typeof ServicesHoaCondoAssociationRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/land-trust': {
+      id: '/services/land-trust'
+      path: '/land-trust'
+      fullPath: '/services/land-trust'
+      preLoaderRoute: typeof ServicesLandTrustRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/residential-closings': {
+      id: '/services/residential-closings'
+      path: '/residential-closings'
+      fullPath: '/services/residential-closings'
+      preLoaderRoute: typeof ServicesResidentialClosingsRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/residential-evictions': {
+      id: '/services/residential-evictions'
+      path: '/residential-evictions'
+      fullPath: '/services/residential-evictions'
+      preLoaderRoute: typeof ServicesResidentialEvictionsRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
 
+interface ServicesRouteChildren {
+  ServicesHoaCondoAssociationRoute: typeof ServicesHoaCondoAssociationRoute
+  ServicesLandTrustRoute: typeof ServicesLandTrustRoute
+  ServicesResidentialClosingsRoute: typeof ServicesResidentialClosingsRoute
+  ServicesResidentialEvictionsRoute: typeof ServicesResidentialEvictionsRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesHoaCondoAssociationRoute: ServicesHoaCondoAssociationRoute,
+  ServicesLandTrustRoute: ServicesLandTrustRoute,
+  ServicesResidentialClosingsRoute: ServicesResidentialClosingsRoute,
+  ServicesResidentialEvictionsRoute: ServicesResidentialEvictionsRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  ServicesRoute: ServicesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
